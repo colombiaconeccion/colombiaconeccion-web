@@ -711,65 +711,74 @@ footer .footer-text {
     }
 }
 /* =======================================================
-2. iPHONE 4 / 5 / SE (320px x 480px+)
+2. iPHONE 4 / 5 / SE (320px x 480px+) - ACTUALIZADO
 ======================================================= */
 
 @media screen and (max-width: 320px) and (min-height: 480px) {
-#logoGif { 
+    #logoGif { 
         height: 75px; 
         margin-top: -40px;
-}
+    }
 
-/* Teleprompter compacto */
+    /* Teleprompter compacto */
     .border-box { 
         height: 50px !important;
         margin: 5px auto !important;
-}
+        width: 95% !important; /* Un poco más ancho para aprovechar espacio */
+    }
 
-.marquee-content-list ul {
-    gap: 20px;
-    animation: scrollTextMobile 60s linear infinite;
-}
+    .marquee-content-list ul {
+        gap: 15px !important; /* Reducido para evitar saltos */
+        animation: scrollText 40s linear infinite !important;
+    }
 
-.marquee-content-list li {
-    font-size: 28px;
-}
+    .marquee-content-list li {
+        font-size: 20px !important; /* Texto más pequeño para que no empuje el borde */
+    }
 
-/* Imagen y Texto en pantallas minúsculas */
+    /* Imagen y Texto en pantallas minúsculas */
     .fixed-cover-container img { 
-        width: 65% !important; 
-        margin-top: 10px !important;
-        margin-bottom: 50px;
+        width: 60% !important; 
+        margin-top: 5px !important;
+        margin-bottom: 30px !important;
     }
 
-/* REDUCIMOS MARGEN PARA QUE NO TAPE EL FOOTER */
+    /* AJUSTE CLAVE: Texto de anuncio para que no rompa el margen */
     .announcement-text {
-        font-size: 13px !important;
-        padding: 0 15px !important;
-        margin-top: 20px !important;
-        margin-bottom: 10px !important; /* Espacio extra abajo */
+        max-width: 280px !important; /* Más ancho para que el texto fluya hacia abajo */
+        font-size: 12px !important;
+        padding: 0 10px !important;
+        margin-bottom: 60px !important; /* Espacio para que el footer no lo pise */
     }
 
-    /* FIX DEFINITIVO PARA EL FOOTER EN IPHONE 5 */
+    /* FIX DEFINITIVO PARA EL FOOTER */
     footer { 
-        margin-top: -90px !important; /* Menos agresivo para no solapar */
-        padding-top: 50px !important;
-        position: relative;
-        z-index: 999; /* Prioridad máxima sobre el texto de arriba */
+        margin-top: -60px !important; /* Menos agresivo para evitar solapamiento */
+        padding-top: 40px !important;
+        min-height: 140px !important;
     }
 
     .social-links {
         display: flex !important;
         justify-content: center !important;
-        gap: 15px !important;
-        position: relative;
-        z-index: 1000 !important; /* Los iconos por encima de todo */
-        pointer-events: auto !important; /* Asegura que el táctil responda */
+        gap: 8px !important; /* 👈 AQUÍ: Espacio reducido para que quepan todos los iconos */
+        padding: 0 5px !important;
     }
 
     .icon-link {
-        font-size: 24px !important;
-        padding: 10px; /* Aumenta el área de contacto del dedo */
+        font-size: 20px !important; /* Iconos un poco más pequeños */
+        padding: 5px !important; 
+    }
+
+    .icon-link.bm {
+        width: 30px !important; /* Ajuste para el logo de BigMauro */
+        height: 30px !important;
+    }
+
+    footer .footer-text {
+        font-size: 10px !important;
+        padding: 0 15px !important;
+        margin-top: 10px !important;
     }
 }
 
