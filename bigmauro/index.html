@@ -5,7 +5,6 @@
     <meta name="theme-color" content="#000000">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <link rel="icon" href="https://colombiaconeccion.com/bigmauro/Imagenes/bigmauroicono.png" type="image/png">
     
@@ -22,20 +21,29 @@
     <meta name="keywords" content="BigMauro, Colombiaconeccion, música urbana, álbum 2024, artista colombiano, nuevo disco urbano" />
 
     <meta property="og:title" content="BigMauro | Nuevo Álbum (Próximamente)"/>
-    <meta property="og:description" content="He terminado mi trabajo más importante hasta hoy."/>
+    <meta property="og:description" content="He terminado mi trabajo más importante hasta hoy. Entra para ver el anuncio oficial y no te pierdas el inicio de esta nueva era."/>
     <meta property="og:image" content="https://colombiaconeccion.com/bigmauro/Imagenes/logo-bigmauro-800x600.jpg"/>
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="600" />
     <meta property="og:url" content="https://colombiaconeccion.com/bigmauro"/>
     <meta property="og:type" content="website"/>
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="BigMauro: La Nueva Era" />
+    <meta name="twitter:description" content="¿Estás listo para el nuevo sonido? El álbum está terminado. Descúbrelo aquí." />
+    <meta name="twitter:image" content="https://colombiaconeccion.com/bigmauro/Imagenes/logo-bigmauro-800x600.jpg" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+
     <header>
-        <nav class="navbar">
+        <nav class="navbar" role="navigation" aria-label="Menú principal">
             <h1 class="logo" id="logoContainer">
                 <img id="logoGif" src="Imagenes/CC Animacion.gif" alt="Logo Colombiaconeccion" class="logo-img" fetchpriority="high">
                 <span class="visually-hidden">Colombiaconeccion</span>
@@ -45,6 +53,22 @@
 
     <main>
         <div class="header-line"></div>
+
+        <div class="border-box" aria-label="Noticias BigMauro">
+            <div class="marquee-content-list" role="status" aria-live="polite">
+                <ul>
+                    <li><span class="blue-stroke">Nuevo Álbum</span> <span class="white-text"> | </span> <span class="blue-stroke">BigMauro</span> <span class="white-text"> | </span> <span class="blue-stroke">Muy Pronto</span></li>
+                    <li><span class="white-text">Nueva música en camino</span> <span class="blue-stroke"> | </span> <span class="white-text">Sígueme en redes sociales</span></li>
+                    <li><span class="blue-stroke">New Album</span> <span class="white-text"> | </span> <span class="blue-stroke">BigMauro</span> <span class="white-text"> | </span> <span class="blue-stroke">Coming Soon</span></li>
+                </ul>
+                <ul aria-hidden="true">
+                    <li><span class="blue-stroke">Nuevo Álbum</span> <span class="white-text"> | </span> <span class="blue-stroke">BigMauro</span> <span class="white-text"> | </span> <span class="blue-stroke">Muy Pronto</span></li>
+                    <li><span class="white-text">Nueva música en camino</span> <span class="blue-stroke"> | </span> <span class="white-text">Sígueme en redes sociales</span></li>
+                    <li><span class="blue-stroke">New Album</span> <span class="white-text"> | </span> <span class="blue-stroke">BigMauro</span> <span class="white-text"> | </span> <span class="blue-stroke">Coming Soon</span></li>
+                </ul>
+            </div>
+        </div>
+
         <section class="album-promotion-section">
             <div class="fixed-cover-container">
                 <img src="Imagenes/sorpresa-Nuevo-Album.png" alt="Nuevo proyecto musical de BigMauro">
@@ -53,10 +77,33 @@
 
         <section class="announcement-section">
             <div class="announcement-container">
-                <p class="announcement-text">
-                    Después de tantos años de trabajo, he terminado mi álbum. 
-                    Esta es una nueva era.
+                <p class="announcement-text" id="announcementText">
+                    Después de tantos años de trabajo y aprovechando cada momento posible, he terminado mi álbum. 
+                    Esta es una nueva era. Este espacio será el punto de partida para todo lo nuevo que vaya saliendo. 
+                    <br><br>
+                    <span style="color: #01A8FF; font-weight: bold;">
+                        El contador se revelará oficialmente cuando las fechas de lanzamiento sean confirmadas.
+                    </span>
                 </p>
+
+                <div class="flip-countdown" id="flipCountdown">
+                    <div class="flip-item">
+                        <div class="flip-card"><span class="top" id="daysTop">?</span><span class="bottom" id="daysBottom">?</span></div>
+                        <small>Días</small>
+                    </div>
+                    <div class="flip-item">
+                        <div class="flip-card"><span class="top" id="hoursTop">?</span><span class="bottom" id="hoursBottom">??</span></div>
+                        <small>Horas</small>
+                    </div>
+                    <div class="flip-item">
+                        <div class="flip-card"><span class="top" id="minutesTop">?</span><span class="bottom" id="minutesBottom">?</span></div>
+                        <small>Minutos</small>
+                    </div>
+                    <div class="flip-item">
+                        <div class="flip-card"><span class="top" id="secondsTop">?</span><span class="bottom" id="secondsBottom">?</span></div>
+                        <small>Segundos</small>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -64,15 +111,29 @@
     <footer>
         <div class="footer-container">
             <div class="social-links">
-                <a href="/" class="icon-link bm"></a>
-                <a href="https://www.youtube.com/@colombiaconeccion" target="_blank" class="icon-link yt"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/@bigmauro.cc" target="_blank" class="icon-link tt"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.instagram.com/oficial_bigmauro/" target="_blank" class="icon-link ig"><i class="fab fa-instagram"></i></a>
+                <a href="/" class="icon-link bm" title="Colombia Coneccion"></a>
+                <a href="https://www.youtube.com/@colombiaconeccion" target="_blank" class="icon-link yt" title="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@bigmauro.cc" target="_blank" class="icon-link tt" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.instagram.com/oficial_bigmauro/" target="_blank" class="icon-link ig" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/ColombiaConecc" target="_blank" class="icon-link tw" title="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="mailto:colombiaconeccion@gmail.com" class="icon-link gm" title="Email"><i class="fas fa-envelope"></i></a>
             </div>
-            <p class="footer-text">© Colombiaconeccion</p>
+            <p class="footer-text">© Colombiaconeccion — Independent Label & Artist Platform</p>
         </div>
     </footer>
 
     <script defer src="main.js"></script>
+
+    <div id="watchContainer" class="watch-only">
+        <div class="watch-face">
+            <img src="Imagenes/CC Animacion.gif" alt="CC Logo" id="watchLogo" class="watch-logo">
+            <div class="hand hour-hand" id="hourHand"></div>
+            <div class="hand min-hand" id="minHand"></div>
+            <div class="hand sec-hand" id="secHand"></div>
+            <div class="center-dot"></div>
+            <div class="digital-clock" id="digitalClock">00:00:00</div>
+            <div class="watch-date" id="watchDate">JUE 29 ENERO</div>
+        </div>
+    </div>
 </body>
 </html>
