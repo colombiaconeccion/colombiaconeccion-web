@@ -167,7 +167,7 @@ async function requestWakeLock() {
 }
 
 // ====================== FLIP COUNTDOWN ======================
-const launchDate = new Date("2030-01-01T00:00:00").getTime();
+const launchDate = new Date("2026-04-29T00:00:00").getTime();
 const flipElements = {
     days: { top: document.getElementById("daysTop"), bottom: document.getElementById("daysBottom") },
     hours: { top: document.getElementById("hoursTop"), bottom: document.getElementById("hoursBottom") },
@@ -200,7 +200,7 @@ function updateFlipCountdown() {
     });
     previousTime = currentTime;
 }
-//setInterval(updateFlipCountdown, 1000);
+setInterval(updateFlipCountdown, 1000);
 // devo de quitar las // en setinterval para que activar y desactivar el cronometro
 
 // ====================== RELOJ ANALÓGICO Y DIGITAL ======================
