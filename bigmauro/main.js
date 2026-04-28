@@ -7,6 +7,19 @@ const MODAL_TRANSITION_TIME = 400;
 // Variable global para controlar el bloqueo de pantalla (Wake Lock)
 let wakeLock = null;
 
+// Colores oficiales de cada plataforma
+const platformColors = {
+    spotify:      '#1DB954',
+    apple:        '#fc3c44',
+    youtube:      '#FF0000',
+    youtubemusic: '#FF0000',
+    deezer:       '#A238FF',
+    tidal:        '#00FFFF',
+    soundcloud:   '#FF5500',
+    amazon:       '#00A8E8',
+    audiomack:    '#FFA500',
+};
+
 // --- FUNCIÓN: cargar contenido del modal desde un slide ---
 const loadModalContent = (slideElement) => {
     if (!slideElement) return;
@@ -14,40 +27,71 @@ const loadModalContent = (slideElement) => {
     const modalImage = document.getElementById('modalImage');
     const streamingLinksContainer = document.getElementById('streamingLinks');
 
-    const spotifyLink = slideElement.dataset.spotify;
-    const appleLink = slideElement.dataset.apple;
-    const youtubeLink = slideElement.dataset.youtube;
-
     const slideImage = slideElement.querySelector('img');
     if (slideImage) {
         modalImage.src = slideImage.src;
         modalImage.alt = slideImage.alt || '';
     }
 
+     const platforms = [
+        { key: 'spotify',      label: 'Spotify',       logo: 'https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png' },
+        { key: 'apple',        label: 'Apple Music',   logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Apple_Music_icon.svg/120px-Apple_Music_icon.svg.png' },
+        { key: 'youtube',      label: 'YouTube',       logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/120px-YouTube_full-color_icon_%282017%29.svg.png' },
+        { key: 'youtubemusic', label: 'YouTube Music', logo: 'https://music.youtube.com/favicon.ico' },
+        { key: 'deezer',       label: 'Deezer',        logo: 'https://www.deezer.com/favicon.ico' },
+        { key: 'tidal',        label: 'Tidal',         logo: 'https://tidal.com/favicon.ico' },
+        { key: 'soundcloud',   label: 'SoundCloud',    logo: 'https://soundcloud.com/favicon.ico' },
+        { key: 'amazon', label: 'Amazon Music', logo: 'https://www.amazon.com/favicon.ico' },
+        { key: 'audiomack',    label: 'Audiomack',     logo: 'https://audiomack.com/favicon.ico' },
+];
+
     streamingLinksContainer.innerHTML = '';
-    const createLink = (href, text, service) => {
-        if (!href) return;
+
+    platforms.forEach(({ key, label, logo }) => {
+        const href = slideElement.dataset[key];
+        if (!href || href.includes('link-')) return;
+
+        const color = platformColors[key] || '#01A8FF';
+
         const a = document.createElement('a');
         a.href = href;
-        a.textContent = text;
         a.target = '_blank';
-        a.dataset.service = service;
-        streamingLinksContainer.appendChild(a);
-    };
+        a.dataset.service = key;
+        a.innerHTML = `
+            <img src="${logo}" alt="${label}" class="platform-logo">
+            <span>${label}</span>
+        `;
 
-    createLink(spotifyLink, 'Escuchar en Spotify', 'spotify');
-    createLink(appleLink, 'Escuchar en Apple Music', 'apple');
-    createLink(youtubeLink, 'Ver en YouTube', 'youtube');
+        // Glow hover con el color oficial de la plataforma
+        a.addEventListener('mouseenter', () => {
+            a.style.borderColor = color;
+            a.style.boxShadow = `0 0 18px ${color}80`;
+            a.style.transform = 'translateY(-3px)';
+        });
+        a.addEventListener('mouseleave', () => {
+            a.style.borderColor = '#01A8FF';
+            a.style.boxShadow = '0 0 6px rgba(1, 166, 255, 0.25)';
+            a.style.transform = 'translateY(0)';
+        });
+
+        streamingLinksContainer.appendChild(a);
+    });
 };
 
-// --- FUNCIÓN: mover swiper (usada por los botones del modal) ---
+// --- FUNCIÓN: mover swiper y actualizar modal ---
 window.moveSwiper = (direction) => {
-    const modal = document.getElementById('streamingModal');
     if (!swiperInstance) return;
-    if (!modal.classList.contains('hidden')) {
-        if (direction === 'next') swiperInstance.slideNext();
-        if (direction === 'prev') swiperInstance.slidePrev();
-    }
+    const modal = document.getElementById('streamingModal');
+    if (modal.classList.contains('hidden')) return;
+
+    if (direction === 'next') swiperInstance.slideNext();
+    if (direction === 'prev') swiperInstance.slidePrev();
+
+    // Espera a que Swiper termine la transición y carga el nuevo slide
+    setTimeout(() => {
+        const activeSlide = document.querySelector('.swiper-slide-active');
+        if (activeSlide) loadModalContent(activeSlide);
+    }, 300);
 };
 
 // --- DOM READY: inicialización y eventos ---
@@ -66,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('streamingModal');
     const closeModalBtn = document.getElementById('closeModalBtn');
     const openModalButtons = document.querySelectorAll('.open-modal-btn');
-    const albumSliderEl = document.querySelector('.album-slider');
 
     // -------------- inicialización Swiper --------------
     if (document.querySelector('.album-slider')) {
@@ -74,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
-            loop: true,
+            //(para que el loop infinito funcione devo activarlo quitando las dos// (loop: true,)
             slidesPerView: 15,
             coverflowEffect: {
                 rotate: 10,
@@ -84,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 slideShadows: false,
             },
             autoplay: {
-                delay: 2500,
+                delay: 3500,
                 disableOnInteraction: false,
             },
             navigation: {
@@ -131,30 +174,18 @@ document.addEventListener('DOMContentLoaded', () => {
     checkWatchDevice();
 });
 
-// ====================== MODO RELOJ: WAKE LOCK (MANTENER ENCENDIDO) ======================
-
-// Función que se activa al darle a "LUEGO" en el reloj
-async function closeInvite() {
-    const overlay = document.getElementById('facerInvite');
-    if(overlay) overlay.style.display = 'none';
-
-    // Activar Wake Lock para que no se apague la web en el reloj
-    await requestWakeLock();
-}
-
+// ====================== MODO RELOJ: WAKE LOCK ======================
 async function requestWakeLock() {
     try {
         if ('wakeLock' in navigator) {
             wakeLock = await navigator.wakeLock.request('screen');
-            
-            // Mensaje de confirmación visual en el reloj
+
             const statusMsg = document.createElement('div');
             statusMsg.innerText = "MODO SIEMPRE ENCENDIDO ACTIVO";
             statusMsg.style = "position:fixed; bottom:20px; font-size:8px; color:#01A8FF; width:100%; text-align:center; z-index:9999; letter-spacing:1px;";
             document.body.appendChild(statusMsg);
             setTimeout(() => statusMsg.remove(), 4000);
 
-            // Reactivar si el usuario minimiza y vuelve
             document.addEventListener('visibilitychange', async () => {
                 if (wakeLock !== null && document.visibilityState === 'visible') {
                     wakeLock = await navigator.wakeLock.request('screen');
@@ -169,8 +200,8 @@ async function requestWakeLock() {
 // ====================== FLIP COUNTDOWN ======================
 const launchDate = new Date("2026-04-29T00:00:00").getTime();
 const flipElements = {
-    days: { top: document.getElementById("daysTop"), bottom: document.getElementById("daysBottom") },
-    hours: { top: document.getElementById("hoursTop"), bottom: document.getElementById("hoursBottom") },
+    days:    { top: document.getElementById("daysTop"),    bottom: document.getElementById("daysBottom") },
+    hours:   { top: document.getElementById("hoursTop"),   bottom: document.getElementById("hoursBottom") },
     minutes: { top: document.getElementById("minutesTop"), bottom: document.getElementById("minutesBottom") },
     seconds: { top: document.getElementById("secondsTop"), bottom: document.getElementById("secondsBottom") },
 };
@@ -180,11 +211,12 @@ function updateFlipCountdown() {
     const now = new Date().getTime();
     const distance = launchDate - now;
     if (distance < 0) {
-        if(document.getElementById("flipCountdown")) document.getElementById("flipCountdown").innerHTML = "<span>¡Ya disponible!</span>";
+        const el = document.getElementById("flipCountdown");
+        if (el) el.innerHTML = "<span>¡Ya disponible!</span>";
         return;
     }
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const days    = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours   = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
     const currentTime = { days, hours, minutes, seconds };
@@ -201,15 +233,14 @@ function updateFlipCountdown() {
     previousTime = currentTime;
 }
 setInterval(updateFlipCountdown, 1000);
-// devo de quitar las // en setinterval para que activar y desactivar el cronometro
 
 // ====================== RELOJ ANALÓGICO Y DIGITAL ======================
 function initWatch() {
     const digitalClock = document.getElementById('digitalClock');
-    const watchDate = document.getElementById('watchDate');
-    const hHand = document.getElementById('hourHand');
-    const mHand = document.getElementById('minHand');
-    const sHand = document.getElementById('secHand');
+    const watchDate    = document.getElementById('watchDate');
+    const hHand        = document.getElementById('hourHand');
+    const mHand        = document.getElementById('minHand');
+    const sHand        = document.getElementById('secHand');
 
     if (!digitalClock) return;
 
@@ -235,7 +266,7 @@ function initWatch() {
 // ====================== DETECCIÓN DE SMARTWATCH ======================
 function checkWatchDevice() {
     const ua = navigator.userAgent.toLowerCase();
-    const isWatch = ua.includes("watch") || ua.includes("wearos") || ua.includes("samsung") || (window.innerWidth < 320);
+    const isWatch  = ua.includes("watch") || ua.includes("wearos") || ua.includes("samsung") || (window.innerWidth < 320);
     const isMobile = /iphone|ipad|ipod|android/.test(ua);
 
     if (isWatch || (isMobile && window.innerWidth < 380)) {
@@ -246,69 +277,47 @@ function checkWatchDevice() {
     }
 }
 
-
+// ====================== LASER EFFECT ======================
 function laserEffect(card) {
     const laser = document.createElement('div');
     laser.className = 'laser-effect';
     card.appendChild(laser);
-
-    // Lo eliminamos después de la animación
     laser.addEventListener('animationend', () => laser.remove());
 }
 
-// Ejemplo: disparar al cambiar minutos
 const minTop = document.getElementById('minutesTop');
 setInterval(() => {
-    // cada cambio de minuto
-    laserEffect(minTop.parentElement); // la tarjeta del minuto
-}, 60000); // 60000 ms = 1 minuto
+    if (minTop) laserEffect(minTop.parentElement);
+}, 60000);
 
-/* ===============================================================
-   SISTEMA DE DETECCIÓN DE DISPOSITIVOS PARA INSTALACIÓN DE RELOJ
-   (Redirección inteligente: Apple Watch vs Wear OS)
-   =============================================================== */
-
+// ====================== DETECCIÓN DISPOSITIVO PARA RELOJ ======================
 function openWatchInvite() {
-    // Referencias a los elementos del DOM
     const invite = document.getElementById('facerInvite');
-    const link = document.getElementById('installLink');
-    const text = document.getElementById('inviteText');
-    
-    // Identificador del navegador/dispositivo
+    const link   = document.getElementById('installLink');
+    const text   = document.getElementById('inviteText');
+
     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-    // TUS ENLACES OFICIALES
-    const linkApple = "https://www.facer.io/watchface/MgxSeGAaKp";
+    const linkApple  = "https://www.facer.io/watchface/MgxSeGAaKp";
     const linkWearOS = "https://www.facer.io/watchface/CsaOIcSK2T";
 
-    // LÓGICA DE DETECCIÓN
-    
-    // Caso A: Dispositivos Apple (iPhone detectado)
     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
         link.href = linkApple;
         link.style.display = "inline-block";
         text.innerText = "Lleva el estilo de BigMauro en tu Apple Watch";
-    } 
-    
-    // Caso B: Dispositivos Android (Samsung, Pixel, Huawei, etc.)
-    else if (/android/i.test(userAgent)) {
+    } else if (/android/i.test(userAgent)) {
         link.href = linkWearOS;
         link.style.display = "inline-block";
         text.innerText = "Lleva el estilo de BigMauro en tu Smartwatch Wear OS";
-    } 
-    
-    // Caso C: Otros (PC, Mac, etc.)
-    else {
+    } else {
         text.innerText = "Diseños para Smartwatch disponibles próximamente para tu sistema.";
-        link.style.display = "none"; // Oculta el botón si no es móvil
+        link.style.display = "none";
     }
 
-    // Muestra el cartel con efecto flex (para que el blur y el centrado funcionen)
     invite.style.display = "flex";
 }
 
-/* FUNCIÓN PARA CERRAR EL CARTEL */
 function closeInvite() {
     const invite = document.getElementById('facerInvite');
-    invite.style.display = "none";
+    if (invite) invite.style.display = "none";
 }
