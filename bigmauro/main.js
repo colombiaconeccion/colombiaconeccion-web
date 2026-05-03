@@ -321,3 +321,41 @@ function closeInvite() {
     const invite = document.getElementById('facerInvite');
     if (invite) invite.style.display = "none";
 }
+
+
+// --- NUEVA FUNCIÓN: Abrir modal por nombre de canción ---
+function openModalByTitle(title) {
+    const slides = document.querySelectorAll('.swiper-slide');
+    for (let slide of slides) {
+        if (slide.dataset.title.toLowerCase() === title.toLowerCase()) {
+            loadModalContent(slide);
+            document.getElementById('streamingModal').classList.remove('hidden');
+            if (swiperInstance) {
+                if (swiperInstance.autoplay) swiperInstance.autoplay.stop();
+                swiperInstance.allowTouchMove = false;
+            }
+            break;
+        }
+    }
+}
+
+// --- ACTUALIZACIÓN EN DOM READY ---
+// Añade esto dentro de tu document.addEventListener('DOMContentLoaded', ...)
+const params = new URLSearchParams(window.location.search);
+const songParam = params.get('song');
+if (songParam) {
+    setTimeout(() => openModalByTitle(songParam), 1000); // Espera 1s para asegurar que Swiper cargó
+}
+
+window.shareSong = () => {
+    const title = document.getElementById('modalTitle').textContent;
+    const shareUrl = window.location.origin + window.location.pathname + '?song=' + encodeURIComponent(title);
+    
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            alert('¡Enlace copiado al portapapeles!');
+        });
+    } else {
+        prompt("Copia este enlace:", shareUrl);
+    }
+};
