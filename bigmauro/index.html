@@ -324,19 +324,22 @@
     <div class="modal-content">
         <button class="close-modal-btn" id="closeModalBtn" aria-label="Cerrar">✕</button>
 
-        <!-- Flechas navegación -->
-        <button class="modal-nav-btn modal-nav-prev" onclick="moveSwiper('prev')" aria-label="Anterior">&#10094;</button>
-        <button class="modal-nav-btn modal-nav-next" onclick="moveSwiper('next')" aria-label="Siguiente">&#10095;</button>
+        <button class="modal-nav-btn modal-nav-prev" onclick="moveSwiper('prev')" aria-label="Anterior">❮</button>
+        <button class="modal-nav-btn modal-nav-next" onclick="moveSwiper('next')" aria-label="Siguiente">❯</button>
 
-        <!-- Imagen pequeña arriba -->
         <div class="modal-image-wrapper">
             <img id="modalImage" src="" alt="" class="modal-song-img">
             <h3 id="modalTitle" class="modal-song-title"></h3>
         </div>
 
-        <!-- Links plataformas -->
         <div class="streaming-links" id="streamingLinks"></div>
-    </div>
+        
+        <div style="margin-top: 25px; text-align: center;">
+            <button onclick="shareSong()" style="background: none; border: 1px solid #01A8FF; color: #01A8FF; padding: 8px 15px; cursor: pointer; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 14px; transition: 0.3s;">
+                🔗 Compartir canción
+            </button>
+        </div>
+        </div>
 </div>
     </main>
 
