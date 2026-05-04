@@ -1,11 +1,11 @@
 // main.js completo — Colombia Coneccion & BigMauro
 
-// Variable global para almacenar la instancia Swiper
+// Variables globales
 let swiperInstance;
-const MODAL_TRANSITION_TIME = 400;
-
-// Variable global para controlar el bloqueo de pantalla (Wake Lock)
 let wakeLock = null;
+let currentSongTitle = ''; // 🔥 Variable global para el título
+
+const MODAL_TRANSITION_TIME = 400;
 
 // Colores oficiales de cada plataforma
 const platformColors = {
@@ -25,6 +25,7 @@ const loadModalContent = (slideElement) => {
     if (!slideElement) return;
 
     const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
     const streamingLinksContainer = document.getElementById('streamingLinks');
 
     const slideImage = slideElement.querySelector('img');
@@ -32,6 +33,10 @@ const loadModalContent = (slideElement) => {
         modalImage.src = slideImage.src;
         modalImage.alt = slideImage.alt || '';
     }
+    // 🔥 GUARDAR EL TÍTULO EN LA VARIABLE GLOBAL
+currentSongTitle = slideElement.dataset.title || '';
+
+
 
      const platforms = [
         { key: 'spotify',      label: 'Spotify',       logo: 'https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png' },
@@ -41,7 +46,7 @@ const loadModalContent = (slideElement) => {
         { key: 'deezer',       label: 'Deezer',        logo: 'https://www.deezer.com/favicon.ico' },
         { key: 'tidal',        label: 'Tidal',         logo: 'https://tidal.com/favicon.ico' },
         { key: 'soundcloud',   label: 'SoundCloud',    logo: 'https://soundcloud.com/favicon.ico' },
-        { key: 'amazon', label: 'Amazon Music', logo: 'https://www.amazon.com/favicon.ico' },
+        { key: 'amazon',       label: 'Amazon Music', logo: 'https://www.amazon.com/favicon.ico' },
         { key: 'audiomack',    label: 'Audiomack',     logo: 'https://audiomack.com/favicon.ico' },
 ];
 
@@ -322,7 +327,6 @@ function closeInvite() {
     if (invite) invite.style.display = "none";
 }
 
-
 // --- NUEVA FUNCIÓN: Abrir modal por nombre de canción ---
 function openModalByTitle(title) {
     const slides = document.querySelectorAll('.swiper-slide');
@@ -343,19 +347,32 @@ function openModalByTitle(title) {
 // Añade esto dentro de tu document.addEventListener('DOMContentLoaded', ...)
 const params = new URLSearchParams(window.location.search);
 const songParam = params.get('song');
+
 if (songParam) {
-    setTimeout(() => openModalByTitle(songParam), 1000); // Espera 1s para asegurar que Swiper cargó
+    // Esperamos un segundo para asegurar que las imágenes y Swiper cargaron
+    setTimeout(() => {
+        openModalByTitle(songParam);
+    }, 1000);
 }
 
 window.shareSong = () => {
-    const title = document.getElementById('modalTitle').textContent;
-    const shareUrl = window.location.origin + window.location.pathname + '?song=' + encodeURIComponent(title);
+    // 🔥 USAR LA VARIABLE GLOBAL EN LUGAR DE BUSCAR EN EL DOM
+    if (!currentSongTitle) {
+        alert('No hay canción seleccionada');
+        return;
+    }
+ 
+    // Construir la URL correctamente
+    const baseUrl = window.location.origin + window.location.pathname;
+    const shareUrl = baseUrl + '?song=' + encodeURIComponent(currentSongTitle);
     
+    // Copiar al portapapeles
     if (navigator.clipboard) {
         navigator.clipboard.writeText(shareUrl).then(() => {
-            alert('¡Enlace copiado al portapapeles!');
+            alert('¡Enlace de "' + currentSongTitle + '" copiado al portapapeles! 🔗');
+        }).catch(() => {
+            console.error('Error al copiar');
+            alert('URL: ' + shareUrl);
         });
-    } else {
-        prompt("Copia este enlace:", shareUrl);
     }
 };
