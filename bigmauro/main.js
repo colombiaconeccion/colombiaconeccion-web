@@ -203,7 +203,7 @@ async function requestWakeLock() {
 }
 
 // ====================== FLIP COUNTDOWN ======================
-const launchDate = new Date("2026-05-06T00:00:00").getTime();
+const launchDate = new Date("2026-05-12T23:59:59").getTime();
 const flipElements = {
     days:    { top: document.getElementById("daysTop"),    bottom: document.getElementById("daysBottom") },
     hours:   { top: document.getElementById("hoursTop"),   bottom: document.getElementById("hoursBottom") },
