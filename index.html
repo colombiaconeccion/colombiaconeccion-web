@@ -1,112 +1,491 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta name="color-scheme" content="dark only">
-    <meta name="theme-color" content="#000000">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <link rel="icon" href="https://colombiaconeccion.com/Imagenes/icono cc favicon.png" type="image/png">
-    
-    <link rel="apple-touch-icon" href="https://colombiaconeccion.com/Imagenes/icono cc favicon fondo negro.png">
+  <!-- FAVICON E ÍCONOS -->
+  <link rel="icon" href="Imagenes/bigmauroicono.png" type="image/png">
+  <link rel="apple-touch-icon" href="Imagenes/bigmauroicono fondo negro.png">
+  <link rel="shortcut icon" sizes="192x192" href="Imagenes/bigmauroicono fondo negro.png">
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="index,follow" />
-    <link rel="canonical" href="https://colombiaconeccion.com/" />
+  <!-- META BÁSICOS -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://colombiaconeccion.com/bigmauro">
 
-    <title>Colombiaconeccion | Official Site</title>
-    <meta name="description" content="Estamos preparando un espacio exclusivo de ColombiaConeccion donde muy pronto descubrirás nuevos proyectos, servicios y contenido que te sorprenderán." />
-    <meta name="keywords" content="Colombiaconeccion, BigMauro, música urbana, sello independiente, artistas colombia" />
+  <!-- SEO: TÍTULO Y DESCRIPCIÓN -->
+  <title>BigMauro | Sin Límites | Sitio Oficial ⚡</title>
+  <meta name="description" content="Escucha 'Sin Límites' el álbum 2025 de BigMauro (Colombiaconeccion). Hip Hop, Reggaetón, Dancehall y fusiones latinas. Disponible en Spotify, Apple Music y YouTube.">
+  <meta name="keywords" content="Sin Límites, BigMauro, Colombiaconeccion, álbum 2026, música urbana, reggaetón, hip hop, dancehall, latino">
 
-    <meta property="og:title" content="Colombiaconeccion | Próximamente"/>
-    <meta property="og:description" content="Sigue nuestra nueva era. Proyectos musicales y contenido exclusivo en camino."/>
-    <meta property="og:image" content="https://colombiaconeccion.com/Imagenes/logo-colombia-coneccion-800x600.jpg"/>
-    <meta property="og:image:width" content="800" />
-    <meta property="og:image:height" content="600" />
-    <meta property="og:url" content="https://colombiaconeccion.com/"/>
-    <meta property="og:type" content="website"/>
+  <!-- 
+    OPEN GRAPH — TARJETA AL COMPARTIR EN REDES
+    🔄 Para cambiar la imagen de la tarjeta: cambia og:image y twitter:image
+    por la URL completa (https://...) de la nueva imagen. Tamaño ideal: 800x600px.
+  -->
+  <meta property="og:title" content="BigMauro | Sin Límites — Nuevo Álbum Oficial">
+  <meta property="og:description" content="Nuevas canciones cada semana. Escucha 'Sin Límites' en todas las plataformas digitales.">
+  <meta property="og:image" content="https://colombiaconeccion.com/bigmauro/Imagenes/logo-bigmauro-800x600.jpg">
+  <meta property="og:image:width" content="800">
+  <meta property="og:image:height" content="600">
+  <meta property="og:url" content="https://colombiaconeccion.com/bigmauro">
+  <meta property="og:type" content="music.album">
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Colombiaconeccion" />
-    <meta name="twitter:description" content="Mantente atento a las próximas novedades de Colombiaconeccion." />
-    <meta name="twitter:image" content="https://colombiaconeccion.com/Imagenes/logo-colombia-coneccion-800x600.jpg" />
+  <!-- TWITTER CARD — 🔄 Actualizar twitter:image junto con og:image -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BigMauro | Sin Límites — Nuevo Álbum Oficial">
+  <meta name="twitter:description" content="Nuevas canciones cada semana. Escucha 'Sin Límites' en todas las plataformas.">
+  <meta name="twitter:image" content="https://colombiaconeccion.com/bigmauro/Imagenes/logo-bigmauro-800x600.jpg">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Russo+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+  <!--
+    JSON-LD — DATOS DEL ÁLBUM PARA GOOGLE
+    🔄 ACTUALIZAR CADA SEMANA: agrega las canciones nuevas en "track" así:
+    {"@type":"MusicRecording","name":"Nombre de la canción"},
+
+    ✅ Complemento       ✅ Nada me para
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicAlbum",
+    "name": "Sin Límites",
+    "byArtist": {
+      "@type": "Person",
+      "name": "BigMauro",
+      "url": "https://colombiaconeccion.com/bigmauro"
+    },
+    "image": "https://colombiaconeccion.com/bigmauro/Imagenes/portada-sin-limites.jpg",
+    "genre": ["Hip Hop", "Reggaetón", "Dancehall", "Latin Fusion"],
+    "url": "https://colombiaconeccion.com/bigmauro",
+    "datePublished": "2026",
+    "track": [
+      {"@type":"MusicRecording","name":"Complemento"},
+      {"@type":"MusicRecording","name":"Nada me para"},
+      {"@type":"MusicRecording","name":"Realidad"},
+      {"@type":"MusicRecording","name":"En Llamas"},
+      {"@type":"MusicRecording","name":"Amor de Papel"},
+      {"@type":"MusicRecording","name":"Contra la Corriente"},
+      {"@type":"MusicRecording","name":"Quiero Amarte"},
+      {"@type":"MusicRecording","name":"Falsos Amigos Para Que"}
+    ]
+  }
+  </script>
+
+  <!-- FUENTES -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Russo+One&display=swap" rel="stylesheet">
+
+  <!-- FONT AWESOME — íconos de redes sociales -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- SWIPER CSS — estilos del carrusel de canciones -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+  <!-- TU CSS PERSONALIZADO — siempre al final para sobrescribir librerías -->
+  <link rel="stylesheet" href="styles.css">
+
 </head>
-
 <body>
 
+    <!-- HEADER -->
     <header>
         <nav class="navbar" role="navigation" aria-label="Menú principal">
-            <h1 class="logo" id="logoContainer">
-                <img id="logoGif" src="Imagenes/CC Animacion.gif" alt="Logo Colombiaconeccion" class="logo-img" fetchpriority="high">
-                <span class="visually-hidden">Colombiaconeccion</span>
-            </h1>
+          <h1 class="logo" id="logoContainer">
+            <img src="Imagenes/CC Animacion.gif" alt="Logo animado Colombiaconeccion" class="logo-img" id="logoGif">
+            <span class="visually-hidden">Colombiaconeccion</span>
+          </h1>
         </nav>
     </header>
 
     <main>
-        <div class="border-box" aria-label="Noticias BigMauro">
-            <div class="marquee-content-list" role="status" aria-live="polite">
-                <ul>
-                    <li><span class="blue-stroke">Página en construcción</span> <span class="white-text"> | </span> <span class="white-text">Pronto encontrarás todo sobre nuevos proyectos, links y servicios</span></li>
-                    <li><span class="blue-stroke">Page Under Construction</span> <span class="white-text"> | </span> <span class="white-text">Soon you will find everything about new projects, links and services</span></li>
-                    <li><span class="blue-stroke">Seite im Aufbau</span> <span class="white-text"> | </span> <span class="white-text">Bald findest du alles über neue Projekte, Links und Services</span></li>
-                </ul>
-                <ul aria-hidden="true">
-                    <li><span class="blue-stroke">Página en construcción</span> <span class="white-text"> | </span> <span class="white-text">Pronto encontrarás todo sobre nuevos proyectos, links y servicios</span></li>
-                    <li><span class="blue-stroke">Page Under Construction</span> <span class="white-text"> | </span> <span class="white-text">Soon you will find everything about new projects, links and services</span></li>
-                    <li><span class="blue-stroke">Seite im Aufbau</span> <span class="white-text"> | </span> <span class="white-text">Bald findest du alles sobre neue Projekte, Links und Services</span></li>
-                </ul>
+       <!-- Línea neon full width -->
+  <div class="header-line"></div>
+<!-- MARQUEE / BANNER MULTIIDIOMA -->
+<div class="border-box" aria-label="Noticias BigMauro">
+  <div class="marquee-content-list" role="status" aria-live="polite">
+<ul>
+  <!-- ESPAÑOL -->
+  <li>
+    <span class="blue-stroke">🚫⬅️ No Mires Atrás</span>
+    <span class="white-text"> | </span>
+    <span class="blue-stroke">🐍 Medusa</span>
+    <span class="white-text"> | </span>
+    <span class="white-text">Nuevos lanzamientos</span>
+    <span class="blue-stroke"> | </span>
+    <span class="blue-stroke">Más música </span>
+    <span class="white-text"> | </span>
+    <span class="blue-stroke">BigMauro ⚡</span>
+  </li>
+
+  <!-- INGLÉS -->
+  <li>
+    <span class="white-text">🚫⬅️ No Mires Atrás</span>
+    <span class="blue-stroke"> | </span>
+    <span class="white-text">🐍 Medusa</span>
+    <span class="blue-stroke"> | </span>
+    <span class="blue-stroke">New releases</span>
+    <span class="white-text"> | </span>
+    <span class="white-text">More music </span>
+    <span class="blue-stroke"> | </span>
+    <span class="white-text">BigMauro ⚡</span>
+  </li>
+
+  <!-- ALEMÁN -->
+  <li>
+    <span class="blue-stroke">🚫⬅️ No Mires Atrás</span>
+    <span class="white-text"> | </span>
+    <span class="blue-stroke">🐍 Medusa</span>
+    <span class="white-text"> | </span>
+    <span class="white-text">Neue Veröffentlichungen</span>
+    <span class="blue-stroke"> | </span>
+    <span class="white-text">Neue Musik</span>
+    <span class="white-text"> | </span>
+    <span class="blue-stroke">BigMauro ⚡</span>
+  </li>
+</ul>
+
+<ul aria-hidden="true">
+  <!-- ESPAÑOL -->
+  <li>
+    <span class="blue-stroke">🚫⬅️ No Mires Atrás</span>
+    <span class="white-text"> | </span>
+    <span class="blue-stroke">🐍 Medusa</span>
+    <span class="white-text"> | </span>
+    <span class="white-text">Nuevos lanzamientos</span>
+    <span class="blue-stroke"> | </span>
+    <span class="blue-stroke">Más música </span>
+    <span class="white-text"> | </span>
+    <span class="blue-stroke">BigMauro ⚡</span>
+  </li>
+
+  <!-- INGLÉS -->
+  <li>
+    <span class="white-text">🚫⬅️ No Mires Atrás</span>
+    <span class="blue-stroke"> | </span>
+    <span class="white-text">🐍 Medusa</span>
+    <span class="blue-stroke"> | </span>
+    <span class="blue-stroke">New releases</span>
+    <span class="white-text"> | </span>
+    <span class="white-text">More music </span>
+    <span class="blue-stroke"> | </span>
+    <span class="white-text">BigMauro ⚡</span>
+  </li>
+
+  <!-- ALEMÁN -->
+  <li>
+    <span class="blue-stroke">🚫⬅️ No Mires Atrás</span>
+    <span class="white-text"> | </span>
+    <span class="blue-stroke">🐍 Medusa</span>
+    <span class="white-text"> | </span>
+    <span class="white-text">Neue Veröffentlichungen</span>
+    <span class="blue-stroke"> | </span>
+    <span class="white-text">Neue Musik </span>
+    <span class="white-text"> | </span>
+    <span class="blue-stroke">BigMauro ⚡</span>
+  </li>
+</ul>
+
+  </div>
+</div>
+
+<!-- Línea neon full width -->
+<div class="header-line bottom-line"></div>
+
+<!-- SECCIÓN DE ANUNCIO Y COUNTDOWN -->
+<section class="announcement-section">
+  <div class="announcement-container">
+
+    <!-- Párrafo explicativo -->
+    <!-- 🔄 ACTUALIZAR CADA SEMANA: cambia este texto cuando publiques canciones nuevas -->
+<p class="announcement-text" id="announcementText">
+  <br><br>
+
+  🚫⬅️ <strong>No Mires Atrás</strong> — Una declaración de firmeza, perseverancia y lealtad con tus propios sueños. Barras crudas de puro rap underground nacidas del dolor superado a través del tiempo. Un mensaje contundente para no dejarte manipular por nadie, levantar la cabeza frente a las adversidades del mundo y recordar que cuando tienes fe y visión, nada puede detenerte.
+  
+  <br><br>
+
+  <strong><a href="https://youtu.be/tzAof261XPc" target="_blank">Ve a YouTube a escucharlo aquí</a></strong>
+
+  <br><br>
+
+  <iframe width="360" height="215" src="https://www.youtube.com/embed/tzAof261XPc?si=g0tInGTAeYHEqRk6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  <br><br>
+
+  🐍🖤 <strong>Medusa (Complemento)</strong> — Un homenaje a la lealtad, a esa persona guerrera y real que no se mueve por dinero y está dispuesta a batallar a tu lado pa' las que sea. Una canción sobre la fuerza interna, el desapego material y la capacidad de superar las traiciones del pasado para convertirse en la roca firme que sostiene al otro. Pasión, lealtad y conexión inquebrantable.
+  
+  <br><br>
+
+  <strong><a href="https://youtu.be/EP8Xjzcbngk" target="_blank">Ve a YouTube a escucharlo aquí</a></strong>
+
+  <br><br>
+
+  <iframe width="360" height="215" src="https://www.youtube.com/embed/EP8Xjzcbngk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  <br><br>
+
+  Dos canciones. Dos realidades distintas. Una misma esencia sin frenos.
+</p>
+
+    <!-- Countdown digital estilo flip -->
+    <div class="flip-countdown" id="flipCountdown">
+      <div class="flip-item">
+        <div class="flip-card">
+          <span class="top" id="daysTop">00</span>
+          <span class="bottom" id="daysBottom">00</span>
+        </div>
+        <small>Días</small>
+      </div>
+      <div class="flip-item">
+        <div class="flip-card">
+          <span class="top" id="hoursTop">00</span>
+          <span class="bottom" id="hoursBottom">00</span>
+        </div>
+        <small>Horas</small>
+      </div>
+      <div class="flip-item">
+        <div class="flip-card">
+          <span class="top" id="minutesTop">00</span>
+          <span class="bottom" id="minutesBottom">00</span>
+        </div>
+        <small>Minutos</small>
+      </div>
+      <div class="flip-item">
+        <div class="flip-card">
+          <span class="top" id="secondsTop">00</span>
+          <span class="bottom" id="secondsBottom">00</span>
+        </div>
+        <small>Segundos</small>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="header-line second-line"></div>
+<!-- SECCION PROMOCION ALBUM -->
+<section id="album-promo" class="album-promotion-section" aria-labelledby="album-title">
+    <h2 id="album-title" class="visually-hidden">Promoción del álbum Sin Límites</h2>
+
+    <div class="fixed-cover-container">
+        <img src="Imagenes/Album/principal sin limites.png" alt="Portada del álbum Sin Límites de BigMauro">
+    </div>
+
+    <!-- SWIPER: lista de canciones -->
+    <!-- 🔄 ACTUALIZAR CADA SEMANA: agrega aquí los nuevos slides con el mismo formato -->
+    <div class="swiper album-slider" role="region" aria-label="Lista de Canciones del Álbum" aria-live="polite">
+        <div class="swiper-wrapper">
+
+            <!-- ✅ CANCIÓN 1: Complemento -->
+            <div class="swiper-slide"
+                 data-title="Complemento"
+                 data-spotify="https://open.spotify.com/intl-de/album/2K08apX2C6MdgnKBe6IDd4"
+                 data-apple="https://music.apple.com/us/album/complemento-single/1893046343"
+                 data-youtube="https://www.youtube.com/watch?v=0y1KduaBjAo"
+                 data-youtubemusic="https://music.youtube.com/watch?v=U3P2ZPzRM20&si=EVezBqwXtHQdmKWA"
+                 data-deezer="https://link.deezer.com/s/337HZV1H2pDVOzwbdoYUo"
+                 data-tidal="https://tidal.com/track/515513522"
+                 data-soundcloud="https://soundcloud.com/bigmauro/complemento"
+                 data-amazon="https://music.amazon.com/albums/B0GX1ZC96T"
+                 data-audiomack="https://audiomack.com/bigmauro/albums">
+                <img src="Imagenes/Album/complemento.png" alt="Portada track Complemento - Sin Límites" loading="lazy">
+                <button class="open-modal-btn" aria-label="Escuchar Complemento">🔹Escuchar🔹</button>
             </div>
+
+            <!-- ✅ CANCIÓN 2: Nada Me Para -->
+            <div class="swiper-slide"
+                 data-title="Nada Me Para"
+                 data-spotify="https://open.spotify.com/intl-de/album/5baNAsn0ehJdvNFQVGcafL"
+                 data-apple="https://music.apple.com/us/album/nada-me-para-single/1894414485"
+                 data-youtube="https://www.youtube.com/watch?v=R9L1hH-xToY"
+                 data-youtubemusic="https://music.youtube.com/watch?v=ZqJnAL6Fy4w"
+                 data-deezer="https://www.deezer.com/de/album/964210011"
+                 data-tidal="https://tidal.com/album/517055429"
+                 data-soundcloud="https://soundcloud.com/bigmauro/nada-me-para"
+                 data-amazon="https://music.amazon.com/albums/B0GXNN9D2B"
+                 data-audiomack="https://audiomack.com/bigmauro/albums">
+                <img src="Imagenes/Album/Nada me para.png" alt="Portada track Nada Me Para - Sin Límites" loading="lazy">
+                <button class="open-modal-btn" aria-label="Escuchar Nada Me Para">🔹Escuchar🔹</button>
+            </div>
+
+           <!-- ✅ CANCIÓN 3: Realidad -->
+            <div class="swiper-slide"
+                 data-title="Realidad"
+                 data-spotify="https://open.spotify.com/intl-de/album/5xb8t8MnYLpjoDMNt1tmtU"
+                 data-apple="https://music.apple.com/us/album/realidad-single/1895543211"
+                 data-youtube="https://youtu.be/AOSpUZG8TIY?si=AJmxsy9m0iwjPeAs"
+                 data-youtubemusic="https://music.youtube.com/watch?v=2viDBRAPgjI"
+                 data-deezer="https://www.deezer.com/de/album/969863021"
+                 data-tidal="https://tidal.com/album/519246338"
+                 data-soundcloud="https://soundcloud.com/bigmauro/realidad"
+                 data-amazon="https://music.amazon.com/albums/B0GYLMWH3K"
+                 data-audiomack="https://audiomack.com/bigmauro/song/realidad">
+                <img src="Imagenes/Album/Realidad.png" alt="Portada track Complemento - Sin Límites" loading="lazy">
+                <button class="open-modal-btn" aria-label="Escuchar Complemento">🔹Escuchar🔹</button>
+            </div>
+
+             <!-- ✅ CANCIÓN 4: En Llamas -->
+            <div class="swiper-slide"
+                 data-title="En Llamas"
+                 data-spotify="https://open.spotify.com/intl-de/album/3epH6JSbdtWTJfDuzQJ87b"
+                 data-apple="https://music.apple.com/us/album/en-llamas-single/1895543341"
+                 data-youtube="https://youtu.be/HqFGH_rt3AY?si=eBuHoiTkMjrOjQKz"
+                 data-youtubemusic="https://music.youtube.com/watch?v=xa2YoCRc468"
+                 data-deezer="https://link.deezer.com/s/33bHcPYRNP1MEO3riCtyN"
+                 data-tidal="https://tidal.com/album/519246572"
+                 data-soundcloud="https://soundcloud.com/bigmauro/en-llamas"
+                 data-amazon="https://music.amazon.com/albums/B0GYLQ5YF8"
+                 data-audiomack="https://audiomack.com/bigmauro/song/en-llamas">
+                <img src="Imagenes/Album/En LLamas.png" alt="Portada track Complemento - Sin Límites" loading="lazy">
+                <button class="open-modal-btn" aria-label="Escuchar Complemento">🔹Escuchar🔹</button>
+            </div>
+
+            <!-- ✅ CANCIÓN 5: Amor de Papel -->
+            <div class="swiper-slide"
+                 data-title="Amor de Papel"
+                 data-spotify="https://open.spotify.com/intl-de/album/7DWs09jfJqnVWlC1zA1VtV"
+                 data-apple="https://music.apple.com/us/song/amor-de-papel/6765914487"
+                 data-youtube="https://youtu.be/hW8ZKzfI33w?si=jgHDNep88JN5xBdj"
+                 data-youtubemusic="https://music.youtube.com/playlist?list=OLAK5uy_m0_xqpZbjdGLCARqOUSqCDYgui1zrfiW0&si=wBSE3mbtJQnydX6j"
+                 data-deezer="https://link.deezer.com/s/33fRzr4gZwKFClL7xQLff"
+                 data-tidal="https://tidal.com/album/521068322"
+                 data-soundcloud="https://soundcloud.com/bigmauro/amor-de-papel"
+                 data-amazon="https://music.amazon.com/albums/B0GZCW8QZ8"
+                 data-audiomack="https://audiomack.com/bigmauro/song/amor-de-papel">
+                <img src="Imagenes/Album/Amor de Papel.png" alt="Portada track Complemento - Sin Límites" loading="lazy">
+                <button class="open-modal-btn" aria-label="Escuchar Amor de Papel">🔹Escuchar🔹</button>
+            </div>
+
+            <!-- ✅ CANCIÓN 6: Contra la Corriente -->
+            <div class="swiper-slide"
+                 data-title="Contra la Corriente"
+                 data-spotify="https://open.spotify.com/intl-de/album/0Vlqtb4e9DEqvqyPSNGIxu?si=KSaQ6BfjQ_OTR66yCspriw"
+                 data-apple="https://music.apple.com/us/song/contra-la-corriente/6765884273"
+                 data-youtube="https://youtu.be/JbGTnvREWwY?si=TM0UNvU-4IFsnGb0"
+                 data-youtubemusic="https://music.youtube.com/playlist?list=OLAK5uy_kS_TKGwkchwyB0srQJ00ILKQAHUEN2uNw&si=OrXpAn_IQmNnSBCm"
+                 data-deezer="https://link.deezer.com/s/33fRAwWGBnAd2PxnfBcix"
+                 data-tidal="https://tidal.com/album/521045580"
+                 data-soundcloud="https://soundcloud.com/bigmauro/contra-la-corriente"
+                 data-amazon="https://music.amazon.com/albums/B0GZCGQ7Y9"
+                 data-audiomack="https://audiomack.com/bigmauro/song/contra-la-corriente">
+                <img src="Imagenes/Album/Contra la Corriente.png" alt="Portada track Complemento - Sin Límites" loading="lazy">
+                <button class="open-modal-btn" aria-label="Escuchar Contra la Corriente">🔹Escuchar🔹</button>
+            </div>
+
+            <!-- ✅ CANCIÓN 7: Quiero Amarte -->
+            <div class="swiper-slide"
+                 data-title="Quiero Amarte"
+                 data-spotify="https://open.spotify.com/intl-de/album/3Wa3zUxfiC9gPl14qHzvoI?si=7PsBIoU7Qve9Qos-YRYodw&nd=1&dlsi=5304219ede4a429d"
+                 data-apple="https://music.apple.com/us/album/quiero-amarte-single/6769654751"
+                 data-youtube="https://www.youtube.com/watch?v=De5KQItciPs"
+                 data-youtubemusic="https://music.youtube.com/watch?v=G8pHKWirx5A&si=faqICtIVNnB2sp16"
+                 data-deezer="https://link.deezer.com/s/33lzRuRJUG0oCOtkZfNqp"
+                 data-tidal="https://tidal.com/album/524880128"
+                 data-soundcloud="https://soundcloud.com/bigmauro/quiero-amarte"
+                 data-amazon="https://music.amazon.com/albums/B0H1VSHK82"
+                 data-audiomack="https://audiomack.com/bigmauro/song/quiero-amarte">
+                <img src="Imagenes/Album/Quiero Amarte.png" alt="Portada track Quiero Amarte - Sin Límites" loading="lazy">
+                <button class="open-modal-btn" aria-label="Escuchar Quiero Amarte">🔹Escuchar🔹</button>
+            </div>
+
+            <!-- ✅ CANCIÓN 8: Falsos Amigos Para Que -->
+            <div class="swiper-slide"
+                 data-title="Falsos Amigos Para Que"
+                 data-spotify="https://open.spotify.com/intl-de/album/2yRqeoOxRx2uL2t3Y6dDVM"
+                 data-apple="https://music.apple.com/us/album/falsos-amigos-para-que-single/6768880735"
+                 data-youtube="https://www.youtube.com/watch?v=z4rQJ_PfGQU"
+                 data-youtubemusic="https://music.youtube.com/watch?v=5RsHu5VuFic&si=luIaIsgujO2awrBP"
+                 data-deezer="https://www.deezer.com/de/album/981738631"
+                 data-tidal="https://tidal.com/album/524182265"
+                 data-soundcloud="https://soundcloud.com/bigmauro/falsos-amigos-para-que"
+                 data-amazon="https://music.amazon.com/albums/B0H1LL29ZW"
+                 data-audiomack="https://audiomack.com/bigmauro/song/falsos-amigos-para-que">
+                <img src="Imagenes/Album/Falsos Amigos Para Que.png" alt="Portada track Falsos Amigos Para Que - Sin Límites" loading="lazy">
+                <button class="open-modal-btn" aria-label="Escuchar Falsos Amigos Para Que">🔹Escuchar🔹</button>
+            </div>
+            <!-- ✅ CANCIÓN 9: No mires atras -->
+            <div class="swiper-slide"
+                 data-title="No Mires Atras"
+                 data-spotify="https://open.spotify.com/intl-de/track/2wiKsnxMhT2MZW3DQmj7tP"
+                 data-youtube="https://www.youtube.com/watch?v=z4rQJ_PfGQU"
+                 data-youtubemusic="https://music.youtube.com/watch?v=pdJe6-O1PC8&list=OLAK5uy_my5PUBc4FyNWYWlq3etKWTcwzPC9S0abM"
+                 data-deezer="https://www.deezer.com/de/album/1040588692"
+                 data-tidal="https://tidal.com/album/547269142/"
+                 data-soundcloud="https://soundcloud.com/bigmauro/no-mires-atras"
+                 data-amazon="https://music.amazon.com/tracks/B0HBYY1DRS?marketplaceId=ATVPDKIKX0DER&musicTerritory=US&ref=dm_sh_aT9qkDMnECHUQCtBF10v0TBAN">
+                <img src="Imagenes/Album/No Mires Atras.png" alt="Portada track No Mires Atras - Sin Límites" loading="lazy">
+                <button class="open-modal-btn" aria-label="Escuchar No Mires Atras">🔹Escuchar🔹</button>
+            </div>
+            <!-- ✅ CANCIÓN 10: Medusa -->
+             <div class="swiper-slide"
+                 data-title="Medusa"
+                 data-spotify="https://open.spotify.com/intl-de/album/6Yof6S26PEJnqQm91sBcdi?si=qgk8jk14Qmuwaq--vV6fuQ"
+                 data-apple="https://music.apple.com/de/album/medusa/6794856759?i=6794856858"
+                 data-youtube="https://www.youtube.com/watch?v=z4rQJ_PfGQU"
+                 data-youtubemusic="https://music.youtube.com/watch?v=znwxU-dS2Ts"
+                 data-deezer="https://www.deezer.com/de/track/4178010942"
+                 data-tidal="https://tidal.com/album/546567733/"
+                 data-soundcloud="https://soundcloud.com/bigmauro/medusa"
+                 data-amazon="https://music.amazon.com/tracks/B0HBN33Q72?marketplaceId=ATVPDKIKX0DER&musicTerritory=US&ref=dm_sh_XOetjFJkRFCMSgW5DPidEdIpp"
+                 data-audiomack="https://audiomack.com/bigmauro/song/medusa">
+                <img src="Imagenes/Album/Medusa.png" alt="Portada track No Mires Atras - Sin Límites" loading="lazy">
+                <button class="open-modal-btn" aria-label="Escuchar No Mires Atras">🔹Escuchar🔹</button>
+            </div>
+
+        <!-- Navegación Swiper -->
+        </div> <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+</section>
+
+<!-- MODAL STREAMING -->
+<div class="modal-overlay hidden" id="streamingModal" role="dialog" aria-modal="true">
+    <div class="modal-content">
+        <button class="close-modal-btn" id="closeModalBtn" aria-label="Cerrar">✕</button>
+
+        <!-- Flechas navegación -->
+        <button class="modal-nav-btn modal-nav-prev" onclick="moveSwiper('prev')" aria-label="Anterior">&#10094;</button>
+        <button class="modal-nav-btn modal-nav-next" onclick="moveSwiper('next')" aria-label="Siguiente">&#10095;</button>
+
+        <!-- Imagen pequeña arriba -->
+        <div class="modal-image-wrapper">
+            <img id="modalImage" src="" alt="" class="modal-song-img">
+            <h3 id="modalTitle" class="modal-song-title"></h3>
         </div>
 
-        <section class="album-promotion-section">
-            <div class="fixed-cover-container">
-                <img src="Imagenes/coming soon 2.png" alt="Nuevo proyecto musical de BigMauro">
-            </div>
-        </section>
-
-        <section class="announcement-section">
-            <div class="announcement-container">
-                <p class="announcement-text" id="announcementText">
-                    Estamos preparando un espacio exclusivo de ColombiaConeccion donde muy pronto descubrirás nuevos proyectos, servicios y contenido que te sorprenderán. Mantente conectado y sé de los primeros en vivir lo que viene.
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-container">
-            <div class="social-links">
-                <a href="/bigmauro/" class="icon-link bm" title="Big Mauro"></a>
-                <a href="https://www.youtube.com/@colombiaconeccion" target="_blank" class="icon-link yt" title="YouTube"><i class="fab fa-youtube"></i></a>
-                <a href="https://www.tiktok.com/@bigmauro.cc?lang=de-DE" target="_blank" class="icon-link tt" title="TikTok"><i class="fab fa-tiktok"></i></a>
-                <a href="https://www.instagram.com/oficial_bigmauro/" target="_blank" class="icon-link ig" title="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href="https://x.com/ColombiaConecc" target="_blank" class="icon-link tw" title="X"><i class="fab fa-x-twitter"></i></a>
-                <a href="mailto:colombiaconeccion@gmail.com" class="icon-link gm" title="Email"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p class="footer-text">© Colombiaconeccion — Independent Label & Artist Platform</p>
-        </div>
-    </footer>
-
-    <script defer src="main.js"></script>
-
-    <div id="watchContainer" class="watch-only">
-        <div class="watch-face">
-            <img src="Imagenes/CC Animacion.gif" alt="CC Logo" id="watchLogo" class="watch-logo">
-            <div class="hand hour-hand" id="hourHand"></div>
-            <div class="hand min-hand" id="minHand"></div>
-            <div class="hand sec-hand" id="secHand"></div>
-            <div class="center-dot"></div>
-            <div class="digital-clock" id="digitalClock">00:00:00</div>
-            <div class="watch-date" id="watchDate">JUE 29 ENERO</div>
+        <!-- Links plataformas -->
+        <div class="streaming-links" id="streamingLinks"></div>
+        <div style="margin-top: 25px; text-align: center;">
+            <button class="share-btn" onclick="shareSong()">
+                🔗 Compartir canción
+            </button>
         </div>
     </div>
+</div>
+    </main>
+
+  <footer>
+  <div class="footer-container">
+    <div class="social-links">
+      <a href="https://colombiaconeccion.com" target="_blank" class="icon-link bm" title="Web Colombiaconeccion"></a>
+      <a href="https://www.youtube.com/@colombiaconeccion" target="_blank" class="icon-link yt" title="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@bigmauro.cc?lang=de-DE" target="_blank" class="icon-link tt" title="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.instagram.com/oficial_bigmauro/" target="_blank" class="icon-link ig" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com/ColombiaConecc" target="_blank" class="icon-link tw" title="X"><i class="fab fa-x-twitter"></i></a>
+      <a href="mailto:colombiaconeccion@gmail.com" class="icon-link gm" title="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+    
+    <p class="footer-text">
+      © Colombiaconeccion — Independent Label & Artist Platform
+    </p>
+  </div>
+</footer>
+
 </body>
+
+    <!-- CARGA JS DE TERCEROS (no render-blocking si es posible, pero Swiper necesita script) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- TU JS (defer para no bloquear) -->
+    <script defer src="main.js"></script>
 </html>
