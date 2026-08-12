@@ -409,7 +409,7 @@
             <div class="swiper-slide"
                  data-title="No Mires Atras"
                  data-spotify="https://open.spotify.com/intl-de/track/2wiKsnxMhT2MZW3DQmj7tP"
-                 data-youtube="https://www.youtube.com/watch?v=z4rQJ_PfGQU"
+                 data-youtube="https://youtu.be/tzAof261XPc?si=8tT_Cx_WYjynGifb"
                  data-youtubemusic="https://music.youtube.com/watch?v=pdJe6-O1PC8&list=OLAK5uy_my5PUBc4FyNWYWlq3etKWTcwzPC9S0abM"
                  data-deezer="https://www.deezer.com/de/album/1040588692"
                  data-tidal="https://tidal.com/album/547269142/"
@@ -423,7 +423,7 @@
                  data-title="Medusa"
                  data-spotify="https://open.spotify.com/intl-de/album/6Yof6S26PEJnqQm91sBcdi?si=qgk8jk14Qmuwaq--vV6fuQ"
                  data-apple="https://music.apple.com/de/album/medusa/6794856759?i=6794856858"
-                 data-youtube="https://www.youtube.com/watch?v=z4rQJ_PfGQU"
+                 data-youtube="https://youtu.be/EP8Xjzcbngk?si=aNM-YSvCrtq0P5nL"
                  data-youtubemusic="https://music.youtube.com/watch?v=znwxU-dS2Ts"
                  data-deezer="https://www.deezer.com/de/track/4178010942"
                  data-tidal="https://tidal.com/album/546567733/"
@@ -444,26 +444,30 @@
 <!-- MODAL STREAMING -->
 <div class="modal-overlay hidden" id="streamingModal" role="dialog" aria-modal="true">
     <div class="modal-content">
+        <!-- Botón cerrar modal (arriba a la derecha) -->
         <button class="close-modal-btn" id="closeModalBtn" aria-label="Cerrar">✕</button>
 
-        <!-- Flechas navegación -->
-        <button class="modal-nav-btn modal-nav-prev" onclick="moveSwiper('prev')" aria-label="Anterior">&#10094;</button>
-        <button class="modal-nav-btn modal-nav-next" onclick="moveSwiper('next')" aria-label="Siguiente">&#10095;</button>
-
-        <!-- Imagen pequeña arriba -->
+        <!-- COLUMNA IZQUIERDA: Flechas + Portada + Título + Botón Compartir -->
         <div class="modal-image-wrapper">
-            <img id="modalImage" src="" alt="" class="modal-song-img">
+            <!-- Grupo horizontal: Flecha Izquierda + Portada + Flecha Derecha -->
+            <div class="cover-navigation-group">
+                <button class="modal-nav-btn modal-nav-prev" onclick="moveSwiper('prev')" aria-label="Anterior">&#10094;</button>
+                <img id="modalImage" src="" alt="" class="modal-song-img">
+                <button class="modal-nav-btn modal-nav-next" onclick="moveSwiper('next')" aria-label="Siguiente">&#10095;</button>
+            </div>
+            
             <h3 id="modalTitle" class="modal-song-title"></h3>
-        </div>
 
-        <!-- Links plataformas -->
-        <div class="streaming-links" id="streamingLinks"></div>
-        <div style="margin-top: 25px; text-align: center;">
+            <!-- Botón compartir justo debajo de la portada -->
             <button class="share-btn" onclick="shareSong()">
                 🔗 Compartir canción
             </button>
         </div>
+
+        <!-- COLUMNA DERECHA: Links a plataformas digitales -->
+        <div class="streaming-links" id="streamingLinks"></div>
     </div>
+</div>
 </div>
     </main>
 
