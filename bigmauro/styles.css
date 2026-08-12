@@ -513,10 +513,13 @@ body {
 /* Caja principal del modal */
 .modal-content {
     position: relative;
-    width: 90vw;              /* 🔥 antes 50% */
-    max-width: 500px;         /* 🔥 control en desktop */
-    max-height: 85vh;         /* 🔥 evita que se salga */
-    padding: 40px 20px;       /* 🔥 antes 100px (muy grande) */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90vw;
+    max-width: 440px;
+    max-height: 100vh;
+    padding: 80px 20px 20px 20px;
     background: #000000;
     backdrop-filter: blur(8px);
     border: none;
@@ -524,13 +527,14 @@ body {
     box-shadow: 
         0 0 5px rgb(255, 255, 255),
         0 0 5px rgb(1, 166, 255);
-    overflow-y: auto;         /* 🔥 permite scroll */
+    overflow-y: auto;
     overflow-x: hidden;
     transform: scale(1);
     transition: transform 0.3s ease;
+    box-sizing: border-box;
 }
 
-/* Borde LED animado — líneas horizontales (arriba y abajo) */
+/* Borde LED animado — líneas horizontales */
 .modal-content::before {
     content: "";
     position: absolute;
@@ -549,7 +553,7 @@ body {
     animation: borderFlow 10s linear infinite;
 }
 
-/* Borde LED animado — líneas verticales (izquierda y derecha) */
+/* Borde LED animado — líneas verticales */
 .modal-content::after {
     content: "";
     position: absolute;
@@ -576,107 +580,112 @@ body {
     background: transparent;
     border: none;
     color: #ffffff;
-    font-size: 30px;
+    font-size: 26px;
     font-weight: bold;
     cursor: pointer;
     z-index: 30;
+    line-height: 1;
 }
+
 .close-modal-btn:hover {
     opacity: 0.85;
-    transform: translateY(-10%) scale(1.05);
+    transform: scale(1.1);
 }
-/* Flechas de navegación dentro del modal */
+
+/* Contenedor de la sección superior del modal (portada y controles) */
+.modal-image-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 35px;
+}
+
+/* Grupo horizontal: Flecha Izq + Portada + Flecha Der */
+.cover-navigation-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Flechas de navegación dentro del modal (anula posiciones absolutas previas) */
 .modal-nav-btn {
-    position: absolute;
-    top: 70px;
-    transform: translateY(-50%);
+    position: static !important;
+    transform: none !important;
     background: transparent;
     border: none;
     cursor: pointer;
     font-family: system-ui, -apple-system, sans-serif;
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 600;
-    color: var(--primary-color, #01A8FF);
-    -webkit-text-fill-color: var(--primary-color, #01A8FF);
-    z-index: 100000;
+    color: #01A8FF !important;
+    -webkit-text-fill-color: #01A8FF !important;
+    z-index: 10;
     line-height: 1;
-}
-
-.modal-nav-prev { left: 110px; }
-.modal-nav-next { right: 110px; }
-
-.modal-nav-btn:hover {
-    opacity: 0.85;
-    transform: translateY(-45%) scale(1.05);
-}
-
-/* Contenedor de la imagen del track */
-.modal-image-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 0 0 15px 0;
-}
-
-/* Imagen del track dentro del modal */
-.modal-song-img {
-   
-    width: 220px;
-    height: auto;
-    margin-top: -30px;
-    object-fit: contain;
-    border: none;
-    box-shadow: none;
-    transition: transform 0.4s ease;
-}
-
-.modal-song-img:hover {
-    transform: scale(1.05) translateY(-5px);
-}
-
-/* Título del track (oculto porque la imagen ya tiene el título) */
-.modal-content h3 {
-    font-family: 'Russo One', sans-serif;
-    color: var(--primary-color);
-    font-size: 20px;
-    text-align: center;
-}
-
- .share-btn {
-    background: none;
-    border: 2px solid #01A8FF;
-    color: #01A8FF;
-    padding: 8px 15px;
-    cursor: pointer;
-    border-radius: 5px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    transition: 0.3s;
-}
-/* ============================================================
-   11. LINKS DE PLATAFORMAS EN EL MODAL
-   Grid de botones con logo y nombre de cada plataforma.
-   ============================================================ */
-
-/* Grid 2 columnas */
-.streaming-links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 7px;
-    width: 100%;
-    margin-top: 10px;
     padding: 0 5px;
 }
 
-/* Cada botón de plataforma */
+.modal-nav-btn:hover {
+    opacity: 0.8;
+    transform: scale(1.1) !important;
+}
+
+/* Imagen de portada del track */
+.modal-song-img {
+    width: 250px;
+    height: auto;
+    object-fit: contain;
+    border: none;
+    box-shadow: none;
+    transition: transform 0.3s ease;
+}
+
+.modal-song-img:hover {
+    transform: scale(1.03);
+}
+
+/* Botón compartir ubicado debajo de la portada */
+.share-btn {
+    margin-top: 2px;
+    background: transparent;
+    border: 1px solid #01A8FF;
+    color: #01A8FF;
+    padding: 6px 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    transition: 0.3s ease;
+}
+
+.share-btn:hover {
+    background-color: #01A8FF;
+    color: #000000;
+}
+
+
+/* ============================================================
+   11. LINKS DE PLATAFORMAS EN EL MODAL
+   ============================================================ */
+
+.streaming-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
 .streaming-links a {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    padding: 8px 6px;
+    gap: 4px;
+    padding: 8px 5px;
     background-color: #000000;
     border: 1px solid #01A8FF;
     border-radius: 6px;
@@ -691,11 +700,16 @@ body {
     transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* Logo de la plataforma dentro del botón */
+.streaming-links a:hover {
+    border-color: #ffffff;
+    box-shadow: 0 0 10px rgba(1, 168, 255, 0.6);
+    transform: translateY(-2px);
+}
+
 .platform-logo {
-    height: 20px;
+    height: 18px;
     width: auto;
-    max-width: 70px;
+    max-width: 65px;
     object-fit: contain;
 }
 
@@ -1161,9 +1175,8 @@ footer .footer-text {
    ============================================================ */
 @media screen and (orientation: landscape) and (max-height: 500px) {
 
-      .fixed-cover-container img {
+    .fixed-cover-container img {
         width: 13%;
-       
     }
 
     .swiper-slide img {
@@ -1171,94 +1184,121 @@ footer .footer-text {
         height: 120px;
     }
 
-   .swiper.album-slider .swiper-button-prev {
-        left: 1080px !important;
+    .swiper.album-slider .swiper-button-prev {
+        left: 20px !important;
         right: auto !important;
-        top: 100% !important;
+        top: 50% !important;
         transform: translateY(-50%) !important;
     }
 
     .swiper.album-slider .swiper-button-next {
-        right: 1080px !important;
+        right: 20px !important;
         left: auto !important;
-        top: 100% !important;
+        top: 50% !important;
         transform: translateY(-50%) !important;
     }
 
     .swiper.album-slider .swiper-button-prev::after,
     .swiper.album-slider .swiper-button-next::after {
-        font-size: 45px !important;
+        font-size: 35px !important;
     }
 
-    /* Dentro de la sección LANDSCAPE */
-.open-modal-btn {
-    margin-top: 140px !important; /* Menor valor = más arriba. Estaba en 200px */
-    padding: 5px 10px !important;  /* Un poco más pequeño para que no estorbe */
-    font-size: 12px !important;    /* Ajuste de letra para pantallas bajas */
-}
+    .open-modal-btn {
+        margin-top: 150px !important;
+        padding: 5px 10px !important;
+        font-size: 12px !important;
+    }
     
     .modal-content {
+        position: relative;
         max-height: 95vh;
-        padding: 35px 20px;
+        padding: 20px;
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 20px;
+        justify-content: space-between;
+        gap: 15px;
         width: 95vw;
-        max-width: 800px;
+        max-width: 850px;
     }
 
+    /* SECCIÓN IZQUIERDA: PORTADA + FLECHAS + BOTÓN COMPARTIR */
     .modal-image-wrapper {
         width: 40%;
         margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    /* Contenedor que junta Flecha Izq + Imagen + Flecha Der */
+    .cover-navigation-group {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
     }
 
     .modal-song-img {
-        margin-right: -15px;
         width: 100%;
-        max-width: 150px;
-        margin-top: 10;
+        max-width: 120px; /* Tamaño controlado de la portada */
+        height: auto;
+        margin: 0;
         transform: none;
     }
 
-     .share-btn {
-    margin-top: 100px;
-    margin-left: -745px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 12px;
-}
+    /* Flechas dentro del grupo de la portada */
+    .modal-nav-btn {
+        position: relative; /* Ya no son absolutas al modal */
+        top: auto;
+        left: auto;
+        right: auto;
+        transform: none;
+        font-size: 26px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0 5px;
+    }
 
-/* Opcional: agrega un efecto al pasar el mouse */
-.share-btn:hover {
-    background-color: #01A8FF;
-    color: white;
-}
+    /* Botón de compartir justo abajo de la imagen */
+    .share-btn {
+        margin-top: 8px;
+        margin-left: 0;
+        padding: 4px 10px;
+        border-radius: 5px;
+        font-size: 11px;
+        width: auto;
+    }
 
+    .share-btn:hover {
+        background-color: #01A8FF;
+        color: white;
+    }
+
+    /* SECCIÓN DERECHA: PLATAFORMAS */
     .streaming-links {
-        grid-template-columns: 1fr 1fr 1fr;
-        width: 60%;
+        grid-template-columns: repeat(3, 1fr);
+        width: 55%;
         margin-top: 0;
-        gap: 5px;
+        gap: 6px;
     }
 
     .streaming-links a {
-        padding: 5px;
-        font-size: 9px;
+        padding: 6px 4px;
+        font-size: 10px;
     }
 
-    .modal-nav-btn {
-        top: 50%;
-        font-size: 30px;
-    }
-
-    .modal-nav-prev { left: 10px; }
-    .modal-nav-next { right: 295px; }
-
+    /* BOTÓN DE CERRAR MODAL (ESQUINA SUPERIOR DERECHA) */
     .close-modal-btn {
-        top: 9px;
-        right: 300px;
-        font-size: 25px;
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 22px;
+        z-index: 11;
     }
 
 } /* ← CIERRE LANDSCAPE */
