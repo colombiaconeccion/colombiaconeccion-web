@@ -3,7 +3,8 @@
 // Variables globales
 let swiperInstance;
 let wakeLock = null;
-let currentSongTitle = ''; // 🔥 Variable global para el título
+let currentSongTitle = '';
+let currentSongSlug = '';
 
 const MODAL_TRANSITION_TIME = 400;
 
@@ -33,12 +34,14 @@ const loadModalContent = (slideElement) => {
         modalImage.src = slideImage.src;
         modalImage.alt = slideImage.alt || '';
     }
-    // 🔥 GUARDAR EL TÍTULO EN LA VARIABLE GLOBAL
-currentSongTitle = slideElement.dataset.title || '';
 
+    // GUARDAR EL TÍTULO Y EL SLUG EN VARIABLES GLOBALES
+    currentSongTitle = slideElement.dataset.title || '';
+    currentSongSlug = slideElement.dataset.shareSlug || slideElement.dataset.title.toLowerCase().replace(/\s+/g, '-');
 
+    if (modalTitle) modalTitle.innerText = currentSongTitle;
 
-     const platforms = [
+    const platforms = [
         { key: 'spotify',      label: 'Spotify',       logo: 'https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_RGB_Green.png' },
         { key: 'apple',        label: 'Apple Music',   logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Apple_Music_icon.svg/120px-Apple_Music_icon.svg.png' },
         { key: 'youtube',      label: 'YouTube',       logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/120px-YouTube_full-color_icon_%282017%29.svg.png' },
@@ -48,7 +51,7 @@ currentSongTitle = slideElement.dataset.title || '';
         { key: 'soundcloud',   label: 'SoundCloud',    logo: 'https://soundcloud.com/favicon.ico' },
         { key: 'amazon',       label: 'Amazon Music', logo: 'https://www.amazon.com/favicon.ico' },
         { key: 'audiomack',    label: 'Audiomack',     logo: 'https://audiomack.com/favicon.ico' },
-];
+    ];
 
     streamingLinksContainer.innerHTML = '';
 
@@ -122,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
             effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
-            //(para que el loop infinito funcione devo activarlo quitando las dos// (loop: true,)
             slidesPerView: 15,
             coverflowEffect: {
                 rotate: 10,
@@ -174,6 +176,16 @@ document.addEventListener('DOMContentLoaded', () => {
     openModalButtons.forEach(btn => btn.addEventListener('click', openModal));
     if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
 
+    // -------------- DETECCIÓN DE PARÁMETROS EN URL PARA AUTOPLAY/MODAL --------------
+    const params = new URLSearchParams(window.location.search);
+    const songParam = params.get('song');
+
+    if (songParam) {
+        setTimeout(() => {
+            openModalByTitle(songParam);
+        }, 600);
+    }
+
     // Iniciar Reloj y Detección
     initWatch();
     checkWatchDevice();
@@ -203,7 +215,7 @@ async function requestWakeLock() {
 }
 
 // ====================== FLIP COUNTDOWN ======================
-const launchDate = new Date("2026-05-23T00:00:00Z").getTime();
+const launchDate = new Date("2026-05-12T23:59:59").getTime();
 const flipElements = {
     days:    { top: document.getElementById("daysTop"),    bottom: document.getElementById("daysBottom") },
     hours:   { top: document.getElementById("hoursTop"),   bottom: document.getElementById("hoursBottom") },
@@ -295,43 +307,16 @@ setInterval(() => {
     if (minTop) laserEffect(minTop.parentElement);
 }, 60000);
 
-// ====================== DETECCIÓN DISPOSITIVO PARA RELOJ ======================
-function openWatchInvite() {
-    const invite = document.getElementById('facerInvite');
-    const link   = document.getElementById('installLink');
-    const text   = document.getElementById('inviteText');
-
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-    const linkApple  = "https://www.facer.io/watchface/MgxSeGAaKp";
-    const linkWearOS = "https://www.facer.io/watchface/CsaOIcSK2T";
-
-    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        link.href = linkApple;
-        link.style.display = "inline-block";
-        text.innerText = "Lleva el estilo de BigMauro en tu Apple Watch";
-    } else if (/android/i.test(userAgent)) {
-        link.href = linkWearOS;
-        link.style.display = "inline-block";
-        text.innerText = "Lleva el estilo de BigMauro en tu Smartwatch Wear OS";
-    } else {
-        text.innerText = "Diseños para Smartwatch disponibles próximamente para tu sistema.";
-        link.style.display = "none";
-    }
-
-    invite.style.display = "flex";
-}
-
-function closeInvite() {
-    const invite = document.getElementById('facerInvite');
-    if (invite) invite.style.display = "none";
-}
-
-// --- NUEVA FUNCIÓN: Abrir modal por nombre de canción ---
-function openModalByTitle(title) {
+// ====================== ABRIR MODAL POR NOMBRE / SLUG ======================
+function openModalByTitle(titleOrSlug) {
     const slides = document.querySelectorAll('.swiper-slide');
+    const target = titleOrSlug.toLowerCase().trim();
+
     for (let slide of slides) {
-        if (slide.dataset.title.toLowerCase() === title.toLowerCase()) {
+        const slideTitle = (slide.dataset.title || '').toLowerCase();
+        const slideSlug = (slide.dataset.shareSlug || '').toLowerCase();
+
+        if (slideTitle === target || slideSlug === target) {
             loadModalContent(slide);
             document.getElementById('streamingModal').classList.remove('hidden');
             if (swiperInstance) {
@@ -343,36 +328,28 @@ function openModalByTitle(title) {
     }
 }
 
-// --- ACTUALIZACIÓN EN DOM READY ---
-// Añade esto dentro de tu document.addEventListener('DOMContentLoaded', ...)
-const params = new URLSearchParams(window.location.search);
-const songParam = params.get('song');
-
-if (songParam) {
-    // Esperamos un segundo para asegurar que las imágenes y Swiper cargaron
-    setTimeout(() => {
-        openModalByTitle(songParam);
-    }, 1000);
-}
-
+// ====================== COMPARTIR CANCIÓN (GENERA SUBPÁGINA CON PORTADA PROPIA) ======================
 window.shareSong = () => {
-    // 🔥 USAR LA VARIABLE GLOBAL EN LUGAR DE BUSCAR EN EL DOM
     if (!currentSongTitle) {
         alert('No hay canción seleccionada');
         return;
     }
- 
-    // Construir la URL correctamente
-    const baseUrl = window.location.origin + window.location.pathname;
-    const shareUrl = baseUrl + '?song=' + encodeURIComponent(currentSongTitle);
-    
-    // Copiar al portapapeles
-    if (navigator.clipboard) {
+
+    // Generar la URL hacia la subcarpeta independiente
+    const slug = currentSongSlug || currentSongTitle.toLowerCase().replace(/\s+/g, '-');
+    const shareUrl = `https://colombiaconeccion.com/bigmauro/sin-límites-2026/${slug}/`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: `BigMauro - ${currentSongTitle}`,
+            text: `Escucha "${currentSongTitle}" de BigMauro en todas las plataformas:`,
+            url: shareUrl
+        }).catch(() => {});
+    } else if (navigator.clipboard) {
         navigator.clipboard.writeText(shareUrl).then(() => {
-            alert('¡Enlace de "' + currentSongTitle + '" copiado al portapapeles! 🔗');
+            alert(`¡Enlace de "${currentSongTitle}" copiado al portapapeles! 🔗`);
         }).catch(() => {
-            console.error('Error al copiar');
-            alert('URL: ' + shareUrl);
+            alert(`URL: ${shareUrl}`);
         });
     }
 };
