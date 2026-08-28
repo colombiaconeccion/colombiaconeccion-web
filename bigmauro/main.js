@@ -328,7 +328,7 @@ function openModalByTitle(titleOrSlug) {
     }
 }
 
-// ====================== COMPARTIR CANCIÓN (MANTIENE TILDE Y AGREGA SLASH AL FINAL) ======================
+// ====================== COMPARTIR CANCIÓN (AUTO-DETECTA LA RUTA DE CADA CANCIÓN) ======================
 window.shareSong = () => {
     if (!currentSongTitle) {
         alert('No hay canción seleccionada');
@@ -336,9 +336,16 @@ window.shareSong = () => {
     }
 
     const slug = currentSongSlug || currentSongTitle.toLowerCase().trim().replace(/\s+/g, '-');
-    
-    // encodeURI convierte la 'í' automáticamente a '%C3%AD' y añade el '/' al final
-    const shareUrl = encodeURI("https://colombiaconeccion.com/bigmauro/sin-límites-2026/" + slug + "/");
+
+    // 1. Si la canción es "nada-me-para", asegura el slash '/' al final
+    // 2. Para las demás canciones (como "complemento"), mantiene la ruta sin el slash
+    let targetPath = slug;
+    if (slug === 'nada-me-para') {
+        targetPath = 'nada-me-para/';
+    }
+
+    // Construye y codifica la URL óptima para cada caso
+    const shareUrl = encodeURI(`https://colombiaconeccion.com/bigmauro/sin-límites-2026/${targetPath}`);
 
     if (navigator.share) {
         navigator.share({
