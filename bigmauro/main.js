@@ -328,16 +328,17 @@ function openModalByTitle(titleOrSlug) {
     }
 }
 
-// ====================== COMPARTIR CANCIÓN ======================
+// ====================== COMPARTIR CANCIÓN (MANTIENE TILDE EN SMARTPHONES) ======================
 window.shareSong = () => {
     if (!currentSongTitle) {
         alert('No hay canción seleccionada');
         return;
     }
 
-    // Asegura URL limpia sin tildes para evitar errores de scraping en WhatsApp
     const slug = currentSongSlug || currentSongTitle.toLowerCase().replace(/\s+/g, '-');
-    const shareUrl = `https://colombiaconeccion.com/bigmauro/sin-límites-2026/${slug}`;
+    
+    // Forzado explícito de la cadena con tilde tal cual la necesita el servidor
+    const shareUrl = "https://colombiaconeccion.com/bigmauro/sin-límites-2026/" + slug;
 
     if (navigator.share) {
         navigator.share({
