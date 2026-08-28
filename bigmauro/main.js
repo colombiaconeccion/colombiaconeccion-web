@@ -328,22 +328,25 @@ function openModalByTitle(titleOrSlug) {
     }
 }
 
+// ====================== COMPARTIR CANCIÓN (CON VISTA PREVIA DEFINITIVA) ======================
 window.shareSong = () => {
     if (!currentSongTitle) {
         alert('No hay canción seleccionada');
         return;
     }
 
+    // URL limpia sin barra final /
     const slug = currentSongSlug || currentSongTitle.toLowerCase().replace(/\s+/g, '-');
     const shareUrl = `https://colombiaconeccion.com/bigmauro/sin-límites-2026/${slug}`;
-    const shareText = `BigMauro — ${currentSongTitle}\n🇪🇸 Escucha el sencillo | 🇬🇧 Out now! | 🇩🇪 Jetzt streamen!\n${shareUrl}`;
+
+    // Texto multilingüe para el cuerpo de la publicación
+    const shareText = `BigMauro — ${currentSongTitle}\n🇪🇸 Escucha el sencillo | 🇬🇧 Out now! | 🇩🇪 Jetzt streamen!`;
 
     if (navigator.share) {
         navigator.share({
             title: `BigMauro - ${currentSongTitle}`,
-            text: shareText
-            // NOTA: Se remueve la propiedad "url:" independiente para obligar a Android/Windows
-            // a compartir la URL tal cual la escribimos dentro del texto (sin / al final).
+            text: shareText,
+            url: shareUrl // REQUERIDO: Restablece la vista previa nativa en Windows/Android
         }).catch(() => {});
     } else if (navigator.clipboard) {
         navigator.clipboard.writeText(shareUrl).then(() => {
