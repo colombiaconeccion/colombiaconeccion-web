@@ -335,14 +335,17 @@ window.shareSong = () => {
         return;
     }
 
-    // Generar la URL hacia la subcarpeta independiente
+    // Generar la URL hacia la subcarpeta independiente SIN la barra al final /
     const slug = currentSongSlug || currentSongTitle.toLowerCase().replace(/\s+/g, '-');
-    const shareUrl = `https://colombiaconeccion.com/bigmauro/sin-límites-2026/${slug}/`;
+    const shareUrl = `https://colombiaconeccion.com/bigmauro/sin-límites-2026/${slug}`;
+
+    // Mensaje adaptado para audiencia internacional (ES / EN / DE)
+    const shareText = `BigMauro — ${currentSongTitle}\n🇪🇸 Escucha el sencillo | 🇬🇧 Out now! | 🇩🇪 Jetzt streamen!`;
 
     if (navigator.share) {
         navigator.share({
             title: `BigMauro - ${currentSongTitle}`,
-            text: `Escucha "${currentSongTitle}" de BigMauro en todas las plataformas:`,
+            text: shareText,
             url: shareUrl
         }).catch(() => {});
     } else if (navigator.clipboard) {
