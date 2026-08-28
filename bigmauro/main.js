@@ -335,10 +335,10 @@ window.shareSong = () => {
         return;
     }
 
-    const slug = currentSongSlug || currentSongTitle.toLowerCase().replace(/\s+/g, '-');
+    const slug = currentSongSlug || currentSongTitle.toLowerCase().trim().replace(/\s+/g, '-');
     
-    // Forzado explícito de la cadena con tilde tal cual la necesita el servidor
-    const shareUrl = "https://colombiaconeccion.com/bigmauro/sin-límites-2026/" + slug;
+    // encodeURI convierte la 'í' automáticamente a '%C3%AD' al compartir
+    const shareUrl = encodeURI("https://colombiaconeccion.com/bigmauro/sin-límites-2026/" + slug);
 
     if (navigator.share) {
         navigator.share({
@@ -347,9 +347,7 @@ window.shareSong = () => {
         }).catch(() => {});
     } else if (navigator.clipboard) {
         navigator.clipboard.writeText(shareUrl).then(() => {
-            alert(`¡Enlace de "${currentSongTitle}" copiado al portapapeles! 🔗`);
-        }).catch(() => {
-            alert(`URL: ${shareUrl}`);
+            alert(`¡Enlace copiado al portapapeles! 🔗`);
         });
     }
 };
