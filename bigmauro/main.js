@@ -328,19 +328,18 @@ function openModalByTitle(titleOrSlug) {
     }
 }
 
-// ====================== COMPARTIR CANCIÓN (UNIVERSAL: ANDROID, IPHONE Y WINDOWS) ======================
+// ====================== COMPARTIR CANCIÓN ======================
 window.shareSong = () => {
     if (!currentSongTitle) {
         alert('No hay canción seleccionada');
         return;
     }
 
+    // Asegura URL limpia sin tildes para evitar errores de scraping en WhatsApp
     const slug = currentSongSlug || currentSongTitle.toLowerCase().replace(/\s+/g, '-');
-    const shareUrl = `https://colombiaconeccion.com/bigmauro/sin-límites-2026/${slug}`;
+    const shareUrl = `https://colombiaconeccion.com/bigmauro/sin-limites-2026/${slug}`;
 
     if (navigator.share) {
-        // Al enviar SOLO title y url, Android/iOS cargan la tarjeta OpenGraph (con la imagen de portada)
-        // y Windows muestra el menú completo con QR y botón de copiar.
         navigator.share({
             title: `BigMauro — ${currentSongTitle}`,
             url: shareUrl
