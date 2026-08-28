@@ -328,26 +328,33 @@ function openModalByTitle(titleOrSlug) {
     }
 }
 
-// ====================== COMPARTIR CANCIÓN (CON VISTA PREVIA DEFINITIVA) ======================
+// ====================== COMPARTIR CANCIÓN (ADAPTATIVO WINDOWS / MÓVIL) ======================
 window.shareSong = () => {
     if (!currentSongTitle) {
         alert('No hay canción seleccionada');
         return;
     }
 
-    // URL limpia sin barra final /
     const slug = currentSongSlug || currentSongTitle.toLowerCase().replace(/\s+/g, '-');
     const shareUrl = `https://colombiaconeccion.com/bigmauro/sin-límites-2026/${slug}`;
-
-    // Texto multilingüe para el cuerpo de la publicación
-    const shareText = `BigMauro — ${currentSongTitle}\n🇪🇸 Escucha el sencillo | 🇬🇧 Out now! | 🇩🇪 Jetzt streamen!`;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (navigator.share) {
-        navigator.share({
-            title: `BigMauro - ${currentSongTitle}`,
-            text: shareText,
-            url: shareUrl // REQUERIDO: Restablece la vista previa nativa en Windows/Android
-        }).catch(() => {});
+        if (isMobile) {
+            // EN SMARTPHONES (S23 Ultra, etc.): Envía texto multilingüe + URL para redes sociales
+            const shareText = `BigMauro — ${currentSongTitle}\n🇪🇸 Escucha el sencillo | 🇬🇧 Out now! | 🇩🇪 Jetzt streamen!`;
+            navigator.share({
+                title: `BigMauro - ${currentSongTitle}`,
+                text: shareText,
+                url: shareUrl
+            }).catch(() => {});
+        } else {
+            // EN WINDOWS / MAC: Envía SOLO la URL para forzar a Edge/Chrome a mostrar el QR y botón de copiar
+            navigator.share({
+                title: `BigMauro - ${currentSongTitle}`,
+                url: shareUrl
+            }).catch(() => {});
+        }
     } else if (navigator.clipboard) {
         navigator.clipboard.writeText(shareUrl).then(() => {
             alert(`¡Enlace de "${currentSongTitle}" copiado al portapapeles! 🔗`);
