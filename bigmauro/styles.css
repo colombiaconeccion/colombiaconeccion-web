@@ -1,5 +1,15 @@
-:root {
-    color-scheme: dark;
+html {
+    color-scheme: dark only;
+    forced-color-adjust: none;
+}
+
+* {
+    forced-color-adjust: none;
+}
+
+img, svg, .icon-link, .icon-link i, .icon-link.bm, .platform-logo {
+    filter: none !important;
+    -webkit-filter: none !important;
 }
 /* ============================================================
    STYLES.CSS — BigMauro | Sin Límites
