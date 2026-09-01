@@ -1319,9 +1319,6 @@ footer .footer-text {
 .swiper-button-next,
 .swiper-button-prev,
 .swiper-button-next::after,
-.swiper-.swiper-button-next,
-.swiper-button-prev,
-.swiper-button-next::after,
 .swiper-button-prev::after {
     forced-color-adjust: none !important;
     color-scheme: dark only !important;
@@ -1333,15 +1330,10 @@ footer .footer-text {
     -webkit-appearance: none;
     appearance: none;
     background-color: transparent !important;
-    border: 2px solid #01A8FF !important;
+    border: none !important;
+    box-shadow: inset 0 0 0 2px #01A8FF !important;
     color: #01A8FF !important;
     -webkit-text-fill-color: #01A8FF !important;
     forced-color-adjust: none !important;
     color-scheme: dark only !important;
-}button-prev::after,
-.open-modal-btn {
-    forced-color-adjust: none !important;
-    color-scheme: dark only !important;
-    color: #01A8FF !important;
-    -webkit-text-fill-color: #01A8FF !important;
 }
