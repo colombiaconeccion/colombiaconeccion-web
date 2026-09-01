@@ -1315,3 +1315,14 @@ footer .footer-text {
     }
 
 } /* ← CIERRE LANDSCAPE */
+
+.swiper-button-next,
+.swiper-button-prev,
+.swiper-button-next::after,
+.swiper-button-prev::after,
+.open-modal-btn {
+    forced-color-adjust: none !important;
+    color-scheme: dark only !important;
+    color: #01A8FF !important;
+    -webkit-text-fill-color: #01A8FF !important;
+}
